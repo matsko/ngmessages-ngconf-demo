@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="MessagesDemo">
+<head>
+<title>NgMessages Demo</title>
+<link rel="stylesheet" type="text/css" href="./app.css" />
+<link rel="stylesheet" type="text/css" href="./lib/gumby/css/gumby.css" />
+</head>
+<body>
+
+<script type="text/ng-template" id="commonErrors">
+<div ng-message="required">You did not enter a value for this field-entry</div>
+<div ng-message="minlength">This value is too short</div>
+<div ng-message="maxlength">This value is too long</div>
+</script>
+
+<form class="grid form"
+      name="registerForm"
+      novalidate
+      ng-controller="FormController as formCtrl"
+      ng-submit="formCtrl.submit(registerForm.$valid, data)"
+      ng-class="{submitted:registerForm.$submitted}">
+
+  <div class="grid-left" ng-class="{hide:formCtrl.completed}">
+    <div class="field-entry">
+      <label>First Name:</label>
+      <div class="field">
+        <input class="input" type="text" name="firstName" ng-model="data.firstName" required server-side-validator />
+      </div>
+      <div ng-messages="registerForm.firstName.$error">
+        <div ng-messages-include="commonErrors"></div>
+        <div ng-message="firstName">**</div>
+      </div>
+    </div>
+
+    <div class="field-entry">
+      <label>Last Name:</label>
+      <div class="field">
+        <input type="text" class="input" name="lastName" ng-model="data.lastName" required server-side-validator />
+      </div>
+      <div ng-messages="registerForm.lastName.$error">
+        <div ng-messages-include="commonErrors"></div>
+        <div ng-message="lastName">**</div>
+      </div>
+    </div>
+
+    <div class="field-entry">
+      <label>Booking Reference:</label>
+      <div class="field">
+        <input class="input" type="text" name="bookingReference" ng-model="data.bookingReference" required server-side-validator />
+      </div>
+      <div ng-messages="registerForm.bookingReference.$error">
+        <div ng-messages-include="commonErrors"></div>
+        <div ng-message="bookingReference">**</div>
+      </div>
+    </div>
+
+    <div class="field-entry">
+      <label>Departure City:</label>
+      <div class="field">
+        <input type="text" class="input" name="departureCity" ng-model="data.departureCity" required server-side-validator />
+      </div>
+      <div ng-messages="registerForm.departureCity.$error">
+        <div ng-messages-include="commonErrors"></div>
+        <div ng-message="departureCity">**</div>
+      </div>
+    </div>
+
+    <nav class="actions">
+      <div class="medium primary btn">
+        <input type="submit" />
+      </div>
+    </nav/>
+  </div>
+
+  <div class="grid-right status-stage" ng-class="{
+      done:formCtrl.completed,
+      ready:formCtrl.serverErrors.length && registerForm.$valid,
+      failure:formCtrl.serverErrors.length && registerForm.$invalid
+    }">
+    <div ng-if="formCtrl.initial" class="inner">
+      <h4 class="heading">
+        Please fill out the form
+      </h4>
+      Make sure to fill out each input field
+    </div>
+    <div ng-if="formCtrl.completed" class="inner">
+      <h4 class="heading">
+        All Done!
+      </h4>
+      The form was successfully submitted
+    </div>
+    <div ng-if="formCtrl.serverErrors.length" class="inner">
+      <h4 class="heading">
+        <span ng-show="registerForm.$invalid">
+          The Server Returned An Error!
+        </span>
+        <span ng-show="registerForm.$valid">
+          Now Try Submitting Again!
+        </span>
+      </h4>
+      <div ng-messages="registerForm.$error" ng-messages-multiple>
+        <div ng-repeat="error in formCtrl.serverErrors">
+          <div ng-message-exp="error.name">- {{ error.message }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script src="./lib/angular.js"></script>
+<script src="./lib/angular-messages.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

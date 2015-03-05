@@ -1,0 +1,101 @@
+.form:not(.submitted) [ng-messages] { display: none; }
+.form [ng-message] {
+  color:maroon;
+}
+
+html, body {
+  background:#999!important;
+}
+
+.field-entry {
+  padding:20px 40px;
+  border-bottom:1px solid #ccc;
+}
+
+.field-entry:nth-child(even) {
+  background:#eee;
+}
+
+.grid {
+  background:white;
+  display:table;
+  width:100%;
+}
+
+.grid > .grid-left,
+.grid > .grid-right {
+  display:table-cell;
+  border-collapse:collapse;
+  border:1px solid #ddd;
+  width:50%;
+}
+
+.actions {
+  padding:20px;
+  text-align:right;
+}
+
+.status-stage {
+  background:#ddd;
+  text-align:center;
+  padding:40px;
+  transition:0.5s linear all;
+}
+
+.status-stage > .inner {
+  border-radius:10px;
+  padding:10px;
+  background:#d1d1d1;
+  transition:0.5s linear all;
+  color:inherit;
+}
+
+.status-stage .heading {
+  color:inherit!important;
+  font-size:30px;
+}
+
+.status-stage.done {
+  background:green;
+}
+
+.status-stage.failure {
+  color:white;
+  background:maroon;
+}
+
+.status-stage.ready {
+  color:white;
+  background:#f6b83f;
+}
+
+.status-stage.ready > .inner {
+  background:#e69c0b;
+}
+
+.status-stage.failure > .inner {
+  background:#a20000;
+}
+
+.status-stage.done {
+  color:white;
+  background:#387918;
+}
+
+.status-stage.done > .inner {
+  background:#45951e;
+}
+
+.grid-left {
+  position:relative;
+}
+
+.grid-left.hide:after {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(255,255,255,0.65);
+  content:"";
+}
